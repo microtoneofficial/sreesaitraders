@@ -93,7 +93,7 @@ export default function AdminPanel() {
 
       setEnquiries(prev =>
         prev.map(e =>
-          e.id === id ? { ...e, status } : e
+          e._id === id ? { ...e, status } : e
         )
       )
 
@@ -119,10 +119,10 @@ export default function AdminPanel() {
       }
 
       setEnquiries(prev =>
-        prev.filter(e => e.id !== id)
+        prev.filter(e => e._id !== id)
       )
 
-      if (selected?.id === id) {
+      if (selected?._id === id) {
         setSelected(null)
       }
 
@@ -264,7 +264,7 @@ export default function AdminPanel() {
                 </thead>
                 <tbody>
                   {filtered.map(e => (
-                    <tr key={e.id}>
+                    <tr key={e._id}>
                       <td className="font-semibold text-gray-900 whitespace-nowrap">{e.name}</td>
                       <td>
                         <a href={`tel:${e.phone}`} className="text-red-700 hover:underline font-medium">{e.phone}</a>
@@ -284,7 +284,7 @@ export default function AdminPanel() {
                       <td>
                         <select
                           value={e.status}
-                          onChange={ev => updateStatus(e.id, ev.target.value)}
+                          onChange={ev => updateStatus(e._id, ev.target.value)}
                           className={`text-xs font-semibold px-2 py-1 rounded-full border-0 cursor-pointer ${STATUS_COLORS[e.status]}`}
                         >
                           {['New', 'Contacted', 'Completed', 'Closed'].map(s => <option key={s}>{s}</option>)}
@@ -296,7 +296,7 @@ export default function AdminPanel() {
                             className="text-green-600 hover:text-green-700 transition-colors" title="WhatsApp">
                             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" /><path d="M12 0C5.373 0 0 5.373 0 12c0 2.106.549 4.081 1.507 5.793L.057 23.75l6.064-1.446C7.827 23.462 9.867 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.893 0-3.671-.523-5.192-1.429l-.373-.22-3.596.858.899-3.516-.243-.388C2.524 15.67 2 13.896 2 12 2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" /></svg>
                           </a>
-                          <button onClick={() => deleteEnquiry(e.id)} className="text-gray-400 hover:text-red-600 transition-colors" title="Delete">
+                          <button onClick={() => deleteEnquiry(e._id)} className="text-gray-400 hover:text-red-600 transition-colors" title="Delete">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                           </button>
                         </div>
