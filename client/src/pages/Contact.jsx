@@ -12,18 +12,44 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
     setLoading(true)
     setError('')
+    setSuccess(false)
+
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/enquiry`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(form),
       })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Something went wrong')
+
+      const text = await res.text()
+
+      let data = {}
+
+      try {
+        data = text ? JSON.parse(text) : {}
+      } catch {
+        throw new Error('Invalid server response')
+      }
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Something went wrong')
+      }
+
       setSuccess(true)
-      setForm({ name: '', phone: '', email: '', product: 'General Enquiry', message: '' })
+
+      setForm({
+        name: '',
+        phone: '',
+        email: '',
+        product: 'General Enquiry',
+        message: '',
+      })
+
     } catch (err) {
       setError(err.message)
     } finally {

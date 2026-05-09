@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import Logo1 from '../../assets/Logo1.png'
+import Logo1 from '../../public/images/Logo1.webp'
 
 const features = [
   { icon: '🐔', title: 'Fresh Chicken', desc: 'Premium quality chicken cuts, sourced fresh daily for the best taste and nutrition.' },
@@ -87,7 +87,7 @@ export default function Home() {
             {/* Right — Logo Image */}
             <div className="hidden lg:flex items-center justify-center h-full">
               <img
-                src={Logo1}
+                src="/images/Logo1.webp"
                 alt="Sree Sai Traders"
                 style={{
                   height: '460px',

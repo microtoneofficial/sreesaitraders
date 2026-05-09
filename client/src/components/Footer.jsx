@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import Logo1 from '../../assets/Logo1.png'
+import Logo1 from '../../public/images/Logo1.webp'
 
 export default function Footer() {
   return (
@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center mb-4">
               <img
-                src={Logo1}
+                src="/images/Logo1.webp"
                 alt="Sree Sai Traders Logo"
                 style={{ height: '90px', width: 'auto', objectFit: 'contain' }}
               />

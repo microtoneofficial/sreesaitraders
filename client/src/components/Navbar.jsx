@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import Logo1 from '../../assets/Logo1.png'
+import Logo1 from '../../public/images/Logo1.webp'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -41,7 +41,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center flex-shrink-0">
             <img
-              src={Logo1}
+              src="/images/Logo1.webp"
               alt="Sree Sai Traders Logo"
               style={{ height: '68px', width: 'auto', objectFit: 'contain' }}
             />
@@ -107,7 +107,7 @@ export default function Navbar() {
             {/* Logo in mobile menu */}
             <div className="flex items-center py-3 mb-1 border-b border-red-50">
               <img
-                src={Logo1}
+                src="/images/Logo1.webp"
                 alt="Sree Sai Traders"
                 style={{ height: '48px', width: 'auto', objectFit: 'contain' }}
               />
