@@ -1,30 +1,11 @@
 import { useState } from 'react'
 
-// Import Images
-import ChickenBreast from '../../assets/ChickenBreast.jpg'
-import Chickendrumstick from '../../assets/Chickendrumstick.jpg'
-import ChickenLiver from '../../assets/ChickenLiver.webp'
-import ChickenThighs from '../../assets/ChickenThighs.jpg'
-import Mutton from '../../assets/Mutton.jpg'
-import MuttonLeg from '../../assets/Muttonlegs.png'
-import MuttonLiver from '../../assets/MuttonLiver.jpg'
-import MuttonHead from '../../assets/MuttonHead.png'
-import Eggs from '../../assets/Eggs.png'
-import CountryChicken from '../../assets/CountryChicken.png'
-import MuttonLungs from '../../assets/MuttonLungs.png'
-import ChickenWings from '../../assets/ChickenWings.png'
-import SkinlessChicken from '../../assets/Skinless.png'
-import DressedChicken from '../../assets/DC.png'
-import BonelessChicken from '../../assets/Boneless.png'
-import ChickenLollipop from '../../assets/Lollipop.png'
-import TurmericCountryChicken from '../../assets/TurmericChicken.png'
-
 
 const PRODUCTS = [
   {
     id: 1,
     name: 'Skinless Chicken',
-    image: SkinlessChicken,
+    image: '/images/Skinless.png',
     category: 'Chicken',
     desc: 'Fresh skinless chicken cuts with low fat and high protein, perfect for healthy cooking, grilling, and curries.',
     badge: 'Healthy'
@@ -32,7 +13,7 @@ const PRODUCTS = [
   {
     id: 2,
     name: 'Dressed Chicken',
-    image: DressedChicken,
+    image: '/images/DC.png',
     category: 'Chicken',
     desc: 'Cleaned and freshly dressed chicken, ready to cook for delicious curries, fries, and family meals.',
     badge: 'Fresh'
@@ -40,7 +21,7 @@ const PRODUCTS = [
   {
     id: 3,
     name: 'Boneless Chicken',
-    image: BonelessChicken,
+    image: '/images/Boneless.png',
     category: 'Chicken',
     desc: 'Tender boneless chicken pieces ideal for biryani, kebabs, gravies, starters, and quick cooking recipes.',
     badge: 'Popular'
@@ -48,14 +29,14 @@ const PRODUCTS = [
   {
     id: 4,
     name: 'Chicken Thigh',
-    image: ChickenThighs,
+    image: '/images/ChickenThighs.jpg',
     category: 'Chicken',
     desc: 'Flavorful dark meat, ideal for biriyani, curries, and frying.'
   },
   {
     id: 5,
     name: 'Chicken Breast',
-    image: ChickenBreast,
+    image: '/images/ChickenBreast.jpg',
     category: 'Chicken',
     desc: 'Lean, protein-rich breast cuts for healthy meals and grills.',
     badge: 'Healthy'
@@ -63,14 +44,14 @@ const PRODUCTS = [
   {
     id: 6,
     name: 'Chicken Drumstick',
-    image: Chickendrumstick,
+    image: '/images/Chickendrumstick.jpg',
     category: 'Chicken',
     desc: 'Classic drumsticks loved by all — great for frying and barbecue.'
   },
   {
     id: 7,
     name: 'Chicken Wings',
-    image: ChickenWings,
+    image: '/images/ChickenWings.png',
     category: 'Chicken',
     desc: 'Crispy, delicious wings perfect for snacks, starters, and parties.',
     badge: 'Popular'
@@ -78,14 +59,14 @@ const PRODUCTS = [
   {
     id: 8,
     name: 'Chicken Liver',
-    image: ChickenLiver,
+    image: '/images/ChickenLiver.webp',
     category: 'Chicken',
     desc: 'Fresh, nutrient-dense chicken liver for fry and curry preparations.'
   },
   {
     id: 9,
     name: 'Mutton',
-    image: Mutton,
+    image: '/images/Mutton.jpg',
     category: 'Mutton',
     desc: 'Tender, flavorful mutton cuts ideal for biryani, curry, and stew.',
     badge: 'Best Seller'
@@ -93,35 +74,35 @@ const PRODUCTS = [
   {
     id: 10,
     name: 'Mutton Head',
-    image: MuttonHead,
+    image: '/images/MuttonHead.png',
     category: 'Mutton',
     desc: 'Traditional mutton head for authentic bone broth and specialty dishes.'
   },
   {
     id: 11,
     name: 'Mutton Liver',
-    image: MuttonLiver,
+    image: '/images/MuttonLiver.jpg',
     category: 'Mutton',
     desc: 'Rich and iron-packed mutton liver for fry, masala, and soup.'
   },
   {
     id: 12,
     name: 'Mutton Legs',
-    image: MuttonLeg,
+    image: '/images/Muttonlegs.png',
     category: 'Mutton',
     desc: 'Hearty mutton legs perfect for slow-cooked stews and curries.'
   },
   {
     id: 13,
     name: 'Mutton Lungs',
-    image: MuttonLungs,
+    image: '/images/MuttonLungs.png',
     category: 'Mutton',
     desc: 'Fresh mutton lungs used in traditional recipes and spicy fries.'
   },
   {
     id: 14,
     name: 'Country Chicken',
-    image: CountryChicken,
+    image: '/images/CountryChicken.png',
     category: 'Chicken',
     desc: 'Free-range country chicken known for its rich, authentic flavor.',
     badge: 'Premium'
@@ -129,7 +110,7 @@ const PRODUCTS = [
   {
     id: 15,
     name: 'Eggs',
-    image: Eggs,
+    image: '/images/Eggs.png',
     category: 'Eggs',
     desc: 'Farm-fresh eggs, packed with protein, perfect for all your cooking needs.',
     badge: 'Daily Fresh'
@@ -137,7 +118,7 @@ const PRODUCTS = [
   {
     id: 16,
     name: 'Chicken Lollipop',
-    image: ChickenLollipop,
+    image: '/images/Lollipop.png',
     category: 'Chicken',
     desc: 'Freshly cut raw chicken lollipop pieces with tender meat and exposed bone, perfect for crispy fries, BBQ, and spicy starters.',
     badge: 'Popular'
@@ -145,14 +126,14 @@ const PRODUCTS = [
   {
     id: 17,
     name: 'Smoky Turmeric Country Chicken',
-    image: TurmericCountryChicken,
+    image: '/images/TurmericChicken.png',
     category: 'Turmeric Country Chicken',
     desc: 'Fresh country chicken pieces coated with natural turmeric for rich flavor, traditional cooking, and healthy homemade dishes.',
     badge: 'Traditional'
   },
 ]
 
-const CATEGORIES = ['All', 'Chicken', 'Mutton', 'Eggs',  'Special']
+const CATEGORIES = ['All', 'Chicken', 'Mutton', 'Eggs', 'Special']
 
 const BADGE_COLORS = {
   'Popular': 'bg-orange-100 text-orange-700',
@@ -320,10 +301,14 @@ export default function Products() {
               <div key={product.id} className="card group flex flex-col">
 
                 {/* Product Image */}
-                <div className="bg-gradient-to-br from-red-50 to-orange-50 p-4 relative overflow-hidden">
+                <div className="bg-gradient-to-br from-red-50 to-orange-50 p-4 relative overflow-hidden rounded-2xl">
                   <img
                     src={product.image}
                     alt={product.name}
+                    loading="lazy"
+                    width="400"
+                    height="400"
+                    decoding="async"
                     className="w-full h-52 object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
                   />
 
