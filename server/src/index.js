@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import { v4 as uuidv4 } from 'uuid';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,8 +22,8 @@ app.use(express.json());
 let enquiries = [];
 
 // Admin credentials
-const ADMIN_EMAIL = 'sabarish@sst.com';
-const ADMIN_PASSWORD = 'Sabarish_KC25';
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // Root route - confirms server is running
 app.get('/', (req, res) => {

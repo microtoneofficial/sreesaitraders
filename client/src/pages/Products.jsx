@@ -147,7 +147,6 @@ const BADGE_COLORS = {
 export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [enquiryProduct, setEnquiryProduct] = useState(null)
 
   const filtered =
     selectedCategory === 'All'

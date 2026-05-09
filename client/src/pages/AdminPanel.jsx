@@ -20,18 +20,49 @@ export default function AdminPanel() {
   useEffect(() => {
     const token = sessionStorage.getItem('sst_admin_token')
     const name = sessionStorage.getItem('sst_admin_name')
-    if (!token) { navigate('/admin'); return }
+
+    if (!token) {
+      navigate('/admin')
+      return
+    }
+
     setAdminName(name || 'Admin')
     fetchEnquiries()
-  }, [])
+  }, [navigate])
 
   const fetchEnquiries = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/enquiries`)
-      const data = await res.json()
+      const controller = new AbortController()
+
+      const timeoutId = setTimeout(() => controller.abort(), 30000)
+
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/enquiries`,
+        {
+          signal: controller.signal,
+        }
+      )
+
+      clearTimeout(timeoutId)
+
+      const text = await res.text()
+
+      let data = {}
+
+      try {
+        data = text ? JSON.parse(text) : {}
+      } catch {
+        throw new Error('Invalid server response')
+      }
+
       setEnquiries(data.enquiries || [])
+
     } catch (err) {
       console.error(err)
+
+      if (err.name === 'AbortError') {
+        alert('Server is taking too long to respond.')
+      }
     } finally {
       setLoading(false)
     }
@@ -45,28 +76,75 @@ export default function AdminPanel() {
 
   const updateStatus = async (id, status) => {
     try {
-      await fetch(`${import.meta.env.VITE_API_URL}/api/enquiry/${id}/status`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status }),
-      })
-      setEnquiries(prev => prev.map(e => e.id === id ? { ...e, status } : e))
-    } catch (err) { console.error(err) }
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/enquiry/${id}/status`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ status }),
+        }
+      )
+
+      if (!res.ok) {
+        throw new Error('Failed to update status')
+      }
+
+      setEnquiries(prev =>
+        prev.map(e =>
+          e.id === id ? { ...e, status } : e
+        )
+      )
+
+    } catch (err) {
+      console.error(err)
+      alert(err.message)
+    }
   }
 
   const deleteEnquiry = async (id) => {
     if (!window.confirm('Delete this enquiry?')) return
+
     try {
-      await fetch(`${import.meta.env.VITE_API_URL}/api/enquiry/${id}`, { method: 'DELETE' })
-      setEnquiries(prev => prev.filter(e => e.id !== id))
-      if (selected?.id === id) setSelected(null)
-    } catch (err) { console.error(err) }
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/enquiry/${id}`,
+        {
+          method: 'DELETE',
+        }
+      )
+
+      if (!res.ok) {
+        throw new Error('Failed to delete enquiry')
+      }
+
+      setEnquiries(prev =>
+        prev.filter(e => e.id !== id)
+      )
+
+      if (selected?.id === id) {
+        setSelected(null)
+      }
+
+    } catch (err) {
+      console.error(err)
+      alert(err.message)
+    }
   }
 
   const filtered = enquiries.filter(e => {
-    const matchSearch = e.name.toLowerCase().includes(search.toLowerCase()) ||
-      e.phone.includes(search) || e.product.toLowerCase().includes(search.toLowerCase())
-    const matchStatus = filterStatus === 'All' || e.status === filterStatus
+    const name = e.name || ''
+    const phone = e.phone || ''
+    const product = e.product || ''
+
+    const matchSearch =
+      name.toLowerCase().includes(search.toLowerCase()) ||
+      phone.includes(search) ||
+      product.toLowerCase().includes(search.toLowerCase())
+
+    const matchStatus =
+      filterStatus === 'All' || e.status === filterStatus
+
     return matchSearch && matchStatus
   })
 
@@ -77,7 +155,17 @@ export default function AdminPanel() {
     completed: enquiries.filter(e => e.status === 'Completed').length,
   }
 
-  const formatDate = (iso) => new Date(iso).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+  const formatDate = (iso) => {
+    if (!iso) return '—'
+
+    return new Date(iso).toLocaleDateString('en-IN', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+  }
 
   return (
     <div className="min-h-screen bg-gray-50" style={{ paddingTop: '84px' }}>
@@ -187,7 +275,9 @@ export default function AdminPanel() {
                       </td>
                       <td className="max-w-40">
                         <button onClick={() => setSelected(e)} className="text-left text-gray-600 hover:text-red-700 transition-colors text-xs truncate block max-w-full">
-                          {e.message.length > 40 ? e.message.slice(0, 40) + '…' : e.message}
+                          {(e.message || '').length > 40
+                            ? (e.message || '').slice(0, 40) + '…'
+                            : e.message || '—'}
                         </button>
                       </td>
                       <td className="text-gray-400 text-xs whitespace-nowrap">{formatDate(e.createdAt)}</td>

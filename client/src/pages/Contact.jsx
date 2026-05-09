@@ -18,13 +18,23 @@ export default function Contact() {
     setSuccess(false)
 
     try {
+      const controller = new AbortController()
+
+      const timeoutId = setTimeout(() => {
+        controller.abort()
+      }, 30000)
+
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/enquiry`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(form),
+        signal: controller.signal,
       })
+
+      clearTimeout(timeoutId)
+
 
       const text = await res.text()
 
@@ -51,7 +61,11 @@ export default function Contact() {
       })
 
     } catch (err) {
-      setError(err.message)
+      setError(
+        err.name === 'AbortError'
+          ? 'Server is taking too long to respond. Please try again.'
+          : err.message
+      )
     } finally {
       setLoading(false)
     }
@@ -138,7 +152,16 @@ export default function Contact() {
                     </div>
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1">Phone *</label>
-                      <input name="phone" value={form.phone} onChange={handleChange} required placeholder="10-digit mobile" className="input-field" />
+                      <input
+                        name="phone"
+                        value={form.phone}
+                        onChange={handleChange}
+                        required
+                        maxLength={10}
+                        pattern="[0-9]{10}"
+                        placeholder="10-digit mobile"
+                        className="input-field"
+                      />
                     </div>
                   </div>
                   <div>

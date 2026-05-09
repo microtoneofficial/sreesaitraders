@@ -11,21 +11,51 @@ export default function AdminLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
     setLoading(true)
     setError('')
+
     try {
+      const controller = new AbortController()
+
+      const timeoutId = setTimeout(() => controller.abort(), 30000)
+
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/login`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(form),
+        signal: controller.signal,
       })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Invalid credentials')
+
+      clearTimeout(timeoutId)
+
+      const text = await res.text()
+
+      let data = {}
+
+      try {
+        data = text ? JSON.parse(text) : {}
+      } catch {
+        throw new Error('Invalid server response')
+      }
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Invalid credentials')
+      }
+
       sessionStorage.setItem('sst_admin_token', data.token)
       sessionStorage.setItem('sst_admin_name', data.name)
+
       navigate('/admin/panel')
+
     } catch (err) {
-      setError(err.message)
+      setError(
+        err.name === 'AbortError'
+          ? 'Server is taking too long to respond. Please try again.'
+          : err.message
+      )
     } finally {
       setLoading(false)
     }
