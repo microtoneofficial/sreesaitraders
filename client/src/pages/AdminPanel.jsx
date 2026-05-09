@@ -27,7 +27,7 @@ export default function AdminPanel() {
 
   const fetchEnquiries = async () => {
     try {
-      const res = await fetch('/api/enquiries')
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/enquiries`)
       const data = await res.json()
       setEnquiries(data.enquiries || [])
     } catch (err) {
@@ -45,7 +45,7 @@ export default function AdminPanel() {
 
   const updateStatus = async (id, status) => {
     try {
-      await fetch(`/api/enquiry/${id}/status`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/enquiry/${id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status }),
@@ -57,7 +57,7 @@ export default function AdminPanel() {
   const deleteEnquiry = async (id) => {
     if (!window.confirm('Delete this enquiry?')) return
     try {
-      await fetch(`/api/enquiry/${id}`, { method: 'DELETE' })
+      await fetch(`${import.meta.env.VITE_API_URL}/api/enquiry/${id}`, { method: 'DELETE' })
       setEnquiries(prev => prev.filter(e => e.id !== id))
       if (selected?.id === id) setSelected(null)
     } catch (err) { console.error(err) }
