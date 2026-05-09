@@ -5,7 +5,7 @@ const PRODUCTS = [
   {
     id: 1,
     name: 'Skinless Chicken',
-    image: '/images/Skinless.png',
+    image: '/images/Skinless.webp',
     category: 'Chicken',
     desc: 'Fresh skinless chicken cuts with low fat and high protein, perfect for healthy cooking, grilling, and curries.',
     badge: 'Healthy'
@@ -13,7 +13,7 @@ const PRODUCTS = [
   {
     id: 2,
     name: 'Dressed Chicken',
-    image: '/images/DC.png',
+    image: '/images/DC.webp',
     category: 'Chicken',
     desc: 'Cleaned and freshly dressed chicken, ready to cook for delicious curries, fries, and family meals.',
     badge: 'Fresh'
@@ -21,7 +21,7 @@ const PRODUCTS = [
   {
     id: 3,
     name: 'Boneless Chicken',
-    image: '/images/Boneless.png',
+    image: '/images/Boneless.webp',
     category: 'Chicken',
     desc: 'Tender boneless chicken pieces ideal for biryani, kebabs, gravies, starters, and quick cooking recipes.',
     badge: 'Popular'
@@ -29,14 +29,14 @@ const PRODUCTS = [
   {
     id: 4,
     name: 'Chicken Thigh',
-    image: '/images/ChickenThighs.jpg',
+    image: '/images/ChickenThighs.webp',
     category: 'Chicken',
     desc: 'Flavorful dark meat, ideal for biriyani, curries, and frying.'
   },
   {
     id: 5,
     name: 'Chicken Breast',
-    image: '/images/ChickenBreast.jpg',
+    image: '/images/ChickenBreast.webp',
     category: 'Chicken',
     desc: 'Lean, protein-rich breast cuts for healthy meals and grills.',
     badge: 'Healthy'
@@ -44,14 +44,14 @@ const PRODUCTS = [
   {
     id: 6,
     name: 'Chicken Drumstick',
-    image: '/images/Chickendrumstick.jpg',
+    image: '/images/Chickendrumstick.webp',
     category: 'Chicken',
     desc: 'Classic drumsticks loved by all — great for frying and barbecue.'
   },
   {
     id: 7,
     name: 'Chicken Wings',
-    image: '/images/ChickenWings.png',
+    image: '/images/ChickenWings.webp',
     category: 'Chicken',
     desc: 'Crispy, delicious wings perfect for snacks, starters, and parties.',
     badge: 'Popular'
@@ -66,7 +66,7 @@ const PRODUCTS = [
   {
     id: 9,
     name: 'Mutton',
-    image: '/images/Mutton.jpg',
+    image: '/images/Mutton.webp',
     category: 'Mutton',
     desc: 'Tender, flavorful mutton cuts ideal for biryani, curry, and stew.',
     badge: 'Best Seller'
@@ -74,35 +74,35 @@ const PRODUCTS = [
   {
     id: 10,
     name: 'Mutton Head',
-    image: '/images/MuttonHead.png',
+    image: '/images/MuttonHead.webp',
     category: 'Mutton',
     desc: 'Traditional mutton head for authentic bone broth and specialty dishes.'
   },
   {
     id: 11,
     name: 'Mutton Liver',
-    image: '/images/MuttonLiver.jpg',
+    image: '/images/MuttonLiver.webp',
     category: 'Mutton',
     desc: 'Rich and iron-packed mutton liver for fry, masala, and soup.'
   },
   {
     id: 12,
     name: 'Mutton Legs',
-    image: '/images/Muttonlegs.png',
+    image: '/images/Muttonlegs.webp',
     category: 'Mutton',
     desc: 'Hearty mutton legs perfect for slow-cooked stews and curries.'
   },
   {
     id: 13,
     name: 'Mutton Lungs',
-    image: '/images/MuttonLungs.png',
+    image: '/images/MuttonLungs.webp',
     category: 'Mutton',
     desc: 'Fresh mutton lungs used in traditional recipes and spicy fries.'
   },
   {
     id: 14,
     name: 'Country Chicken',
-    image: '/images/CountryChicken.png',
+    image: '/images/CountryChicken.webp',
     category: 'Chicken',
     desc: 'Free-range country chicken known for its rich, authentic flavor.',
     badge: 'Premium'
@@ -110,7 +110,7 @@ const PRODUCTS = [
   {
     id: 15,
     name: 'Eggs',
-    image: '/images/Eggs.png',
+    image: '/images/Eggs.webp',
     category: 'Eggs',
     desc: 'Farm-fresh eggs, packed with protein, perfect for all your cooking needs.',
     badge: 'Daily Fresh'
@@ -118,7 +118,7 @@ const PRODUCTS = [
   {
     id: 16,
     name: 'Chicken Lollipop',
-    image: '/images/Lollipop.png',
+    image: '/images/Lollipop.webp',
     category: 'Chicken',
     desc: 'Freshly cut raw chicken lollipop pieces with tender meat and exposed bone, perfect for crispy fries, BBQ, and spicy starters.',
     badge: 'Popular'
@@ -126,8 +126,8 @@ const PRODUCTS = [
   {
     id: 17,
     name: 'Smoky Turmeric Country Chicken',
-    image: '/images/TurmericChicken.png',
-    category: 'Turmeric Country Chicken',
+    image: '/images/TurmericChicken.webp',
+    category: 'Chicken',
     desc: 'Fresh country chicken pieces coated with natural turmeric for rich flavor, traditional cooking, and healthy homemade dishes.',
     badge: 'Traditional'
   },
