@@ -24,6 +24,8 @@ export default function Contact() {
         controller.abort()
       }, 30000)
 
+      console.log(import.meta.env.VITE_API_URL)
+
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/enquiry`, {
         method: 'POST',
         headers: {
